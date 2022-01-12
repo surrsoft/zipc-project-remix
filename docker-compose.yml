@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+  remix_app:
+    container_name: remix-app
+    build: .
+    image: remix-app-img:latest
+    ports:
+      - "22114:3000"
