@@ -6,3 +6,6 @@ services:
     image: remix-app-img:latest
     ports:
       - "22114:3000"
+    restart: always
+    volumes:
+      - ./:/usr/src/app
