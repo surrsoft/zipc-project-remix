@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "motserrat_alternates";
+    src: url("/fonts/motserrat_alternates/MontserratAlternates-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "alumni_sans";
+    src: url("/fonts/Alumni_Sans/static/AlumniSans-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "baloo";
+    src: url("/fonts/baloo/baloo.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    /*font-family: 'alumni_sans';*/
+    font-family: 'motserrat_alternates';
+    /*font-family: 'baloo';*/
+}

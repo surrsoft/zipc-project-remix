@@ -1,0 +1,25 @@
+.crdelemsCls {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    max-width: 300px;
+    border: 1px solid silver;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.crdelemCls {
+    border: 1px solid silver;
+    padding: 4px 12px;
+    border-radius: 6px;
+}
+
+.crdelemCls_title {
+    font-weight: 500;
+}
+
+.crdelemCls_id {
+    font-family: 'alumni_sans', serif;
+    font-size: 12px;
+    color: #9b9292;
+}
