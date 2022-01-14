@@ -20,7 +20,26 @@
 }
 
 :root {
+    --cvxnFont01: "Arial";
+    --cvxnFont02: "Helvetica";
+    --cvxnFont03: sans-serif;
+    --cvxnFont04: monospace;
+    --cvxnFont05: "Times New Roman";
+    --cvxnFont06: "Courier New";
+    --cvxnFont07: "Courier";
+    --cvxnFont08: "Verdana";
+    --cvxnFont09: "Georgia";
+    --cvxnFont10: "Garamond";
+    --cvxnFont11: "Palatino";
+    --cvxnFont12: "Bookman";
+    --cvxnFont13: "Trebuchet";
+    --cvxnFont14: "Tahoma";
+    --cvxnFont15: "Arial Black";
+    --cvxnFont16: "Comic Sans MS";
+    --cvxnFont17: "Impact";
+
     /*font-family: 'alumni_sans';*/
-    font-family: 'motserrat_alternates';
+    /*font-family: 'motserrat_alternates';*/
     /*font-family: 'baloo';*/
+    font-family: var(--cvxnFont03);
 }
