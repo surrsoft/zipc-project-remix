@@ -20,7 +20,7 @@ export const links: LinksFunction = () => {
 };
 
 export const meta: MetaFunction = () => {
-  return {title: "New Remix App"};
+  return {title: "cvxn-project"};
 };
 
 export default function App() {
