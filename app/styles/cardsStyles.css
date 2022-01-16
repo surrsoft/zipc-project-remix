@@ -56,3 +56,8 @@
     font-size: 10px;
     color: #9b9292;
 }
+
+.crdelemMrk .buttons {
+    display: flex;
+    justify-content: end;
+}

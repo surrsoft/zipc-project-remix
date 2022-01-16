@@ -1,0 +1,50 @@
+.cn1110_link {
+    margin-bottom: 16px;
+}
+
+.cn1110_title {
+    color: blue;
+    margin-bottom: 16px;
+}
+
+.cn1110_input-label {
+    font-size: 12px;
+}
+
+.cn1125 {
+    border: 1px solid silver;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.cn1843 {
+    border: 1px solid silver;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.cn1847 {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.cn1910_footerButtons {
+    display: flex;
+    justify-content: end;
+    column-gap: 8px;
+    margin-top: 26px;
+}
+
+.cn1906 {
+    border: 1px solid silver;
+    border-radius: 8px;
+    padding: 4px;
+    overflow-y: auto;
+}
+
+.cn1906 em {
+    font-size: 11px;
+    color: red;
+}

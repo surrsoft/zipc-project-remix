@@ -43,3 +43,12 @@
     /*font-family: 'baloo';*/
     font-family: var(--cvxnFont03);
 }
+
+.cn1850 {
+    padding: 8px;
+}
+
+.cn1909 {
+    color: blue;
+}
+

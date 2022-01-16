@@ -9,6 +9,28 @@ import {
 import type { MetaFunction } from "remix";
 
 import globalStylesUrl from "./styles/global.css";
+import { ChakraProvider } from '@chakra-ui/react';
+import { extendTheme } from "@chakra-ui/react"
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      a: {
+        color: 'red.500',
+        _hover: {
+          textDecoration: 'underline',
+        },
+      },
+    },
+    components: {
+      Link: {
+        baseStyle: {
+          color: 'red.500'
+        }
+      }
+    }
+  },
+});
 
 export const links: LinksFunction = () => {
   return [
@@ -33,7 +55,9 @@ export default function App() {
       <Links/>
     </head>
     <body>
-    <Outlet/>
+    <ChakraProvider theme={theme}>
+      <Outlet/>
+    </ChakraProvider>
     <ScrollRestoration/>
     <Scripts/>
     {process.env.NODE_ENV === "development" && <LiveReload/>}
