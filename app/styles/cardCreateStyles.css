@@ -11,6 +11,12 @@
     font-size: 12px;
 }
 
+.cn1110_err2 {
+    color: red;
+    margin-top: 16px;
+    padding: 6px;
+}
+
 .cn1125 {
     border: 1px solid silver;
     border-radius: 6px;

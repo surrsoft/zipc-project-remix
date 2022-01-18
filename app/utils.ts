@@ -9,6 +9,22 @@ export const uniFieldForm = (pre: string, kelemType: CvxnEnKelemType) => (pre + 
 export const uniFieldName = (kelemType: CvxnEnKelemType, index: number) => UNI_FORM1_KELEM_PREFIX + kelemType + UNI_DIVIDER + index;
 
 // ---
+export enum EnTableMain {
+  ID = 'id',
+  TID = 'tid',
+  TITLE = 'title',
+  COMM = 'comm',
+  KELEMS = 'kelems',
+}
+
+export enum EnTableKelems {
+  ID = 'id',
+  TID = 'tid',
+  TYPE = 'type',
+  VALUE = 'value',
+}
+
+// ---
 export enum EnRoute {
   CARDS = 'cards',
   CARD_CREATE = 'card_create',
@@ -17,4 +33,15 @@ export enum EnRoute {
 
 export function uniPathCreate(elems: string[]) {
   return '/' + elems.join('/')
+}
+
+export function uniErrMessage(code?: string, message?: string) {
+  const arr = []
+  if (code) {
+    arr.push(`code: ${code}`)
+  }
+  if (message) {
+    arr.push(`message: ${message}`)
+  }
+  return arr.join('; ') || 'error'
 }

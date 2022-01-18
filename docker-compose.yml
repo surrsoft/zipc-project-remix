@@ -9,3 +9,5 @@ services:
     restart: always
     volumes:
       - ./:/usr/src/app
+    environment:
+      - AIRTABLE_KEY=keyzbjKNgu52lb9D3

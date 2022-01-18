@@ -3,23 +3,23 @@ import {
   EnRoute,
   uniFieldName,
   uniPathCreate,
-  UNI_FORM1_TITLE, uniPrefixType
+  UNI_FORM1_TITLE, uniPrefixType, uniErrMessage
 } from '~/utils';
 import { Input } from '@chakra-ui/input';
 
 import cardCreateStyles from "~/styles/cardCreateStyles.css";
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { CvxnCrdelem } from '~/elems/CvxnCrdelem';
 import { Button, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
-import { CvxnEnKelemType, CvxnEnKelemTypeAll, CvxnEnKelemTypeData, Type1156 } from '~/elems/CvxnEnKelemType';
+import { CvxnEnKelemType, CvxnEnKelemTypeAll, CvxnEnKelemTypeData, KelemTypeData } from '~/elems/CvxnEnKelemType';
 import _ from 'lodash';
 import { CvxnKelem } from '~/elems/CvxnKelem';
 import { jsx } from '@emotion/react';
 import JSX = jsx.JSX;
 import { RsuvTuArray } from 'rsuv-lib';
 import { ActionFunction, redirect } from 'remix';
-import { crdelemCreate } from '~/elems/CvxnCrdelemApiFNS';
+import { crdelemCreate, crdelemCreateB } from '~/elems/CvxnCrdelemApiFNS';
 
 export const links = () => {
   return [{rel: "stylesheet", href: cardCreateStyles}];
@@ -27,7 +27,9 @@ export const links = () => {
 
 type CreateError = {
   titleInvalid?: boolean
-  kelemsInvalid?: boolean
+  kelemsInvalid?: boolean,
+  commonInvalid?: boolean,
+  commonInvalidErrMessage?: string,
 }
 
 export const action: ActionFunction = async ({request}: any) => {
@@ -62,9 +64,15 @@ export const action: ActionFunction = async ({request}: any) => {
     return errors;
   }
   // ---
-  await crdelemCreate(reqObj)
-  // ---
-  return redirect(uniPathCreate([EnRoute.CARDS]))
+  try {
+    await crdelemCreate(reqObj) // <=== CREATE
+    return redirect(uniPathCreate([EnRoute.CARDS]))
+  } catch (err: any) {
+    console.log('!!-!!-!! err {220118173126}\n', err) // del+
+    errors.commonInvalid = true
+    errors.commonInvalidErrMessage = uniErrMessage(err.code || err.errCode, err.message || err.errMessage)
+    return errors
+  }
 };
 
 export default function CardCreate() {
@@ -73,11 +81,8 @@ export default function CardCreate() {
   function ButtonsFCC({index}: { index: number }) {
 
     const onMenuItemClick = (kelemType: CvxnEnKelemType) => () => {
-      console.log('!!-!!-!! 1211- kelemType {220116122724}\n', kelemType) // del+
       const $cardModelC = _.cloneDeep($cardModel)
-      console.log('!!-!!-!! index {220116185320}\n', index) // del+
       RsuvTuArray.elemAdd($cardModelC.kelems, index, {type: kelemType})
-      // $cardModelC.kelems.push({type: kelemType})
       $cardModelSet($cardModelC)
     }
 
@@ -92,10 +97,11 @@ export default function CardCreate() {
                 <MenuButton as={IconButton} aria-label="add button" icon={<AddIcon/>} size="xs"
                             colorScheme="blue"/>
                 <MenuList>
-                  {CvxnEnKelemTypeAll.map((el: CvxnEnKelemType) => {
-                    const info = CvxnEnKelemTypeData[el] || ({} as Type1156)
+                  {/* LOOP */}
+                  {CvxnEnKelemTypeAll.map((el: CvxnEnKelemType, ix: number) => {
+                    const info = CvxnEnKelemTypeData[el] || ({} as KelemTypeData)
                     return (
-                      <MenuItem key={el} onClick={onMenuItemClick(el)}>{info.name}</MenuItem>
+                      <MenuItem key={ix + 'nx1811'} onClick={onMenuItemClick(el)}>{info.name}</MenuItem>
                     )
                   })}
                 </MenuList>
@@ -151,10 +157,10 @@ export default function CardCreate() {
         {
           // LOOP
           modelsType.kelems.map((elKelem: CvxnKelem, ix) => (
-            <>
-              <KelemFCC key={ix + 'a'} kelem={elKelem} index={ix + 1}/>
-              <ButtonsFCC key={ix + 'b'} index={ix + 1}/>
-            </>
+            <Fragment key={ix + 'nx1813'}>
+              <KelemFCC kelem={elKelem} index={ix + 1}/>
+              <ButtonsFCC index={ix + 1}/>
+            </Fragment>
           ))
         }
       </div>
@@ -189,6 +195,7 @@ export default function CardCreate() {
           <Button type="submit" aria-label="save button" size="sm">Сохранить</Button>
         </div>
         {/* // --- */}
+        {errors?.commonInvalid ? <div className="cn1110_err2">{errors?.commonInvalidErrMessage}</div> : null}
       </div>
     </Form>
   </div>)

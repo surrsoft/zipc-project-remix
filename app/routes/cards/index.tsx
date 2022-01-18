@@ -1,12 +1,27 @@
-import { crdelems } from '~/elems/CvxnCrdelemApiFNS';
+import { cdrelems, crdelemsB } from '~/elems/CvxnCrdelemApiFNS';
 import { CvxnCrdelem } from '~/elems/CvxnCrdelem';
 import { Link, useLoaderData, useNavigate } from '@remix-run/react';
-import { IconButton, Tooltip } from '@chakra-ui/react';
+import { Badge, IconButton, Tooltip } from '@chakra-ui/react';
 import { AddIcon, EditIcon } from '@chakra-ui/icons';
 import { EnRoute, uniPathCreate } from '~/utils';
+import { CvxnEnKelemType, CvxnEnKelemTypeData } from '~/elems/CvxnEnKelemType';
 
 export const loader = async () => {
-  return crdelems()
+  // del+ mass
+  // console.log(`!!-!!-!! -> :::::::::::::: loader() {220118100535}:${Date.now()}`) // del+
+  // try {
+  //   const crdelemsRes = await cdrelems() // del+
+  //   console.log('!!-!!-!! crdelemsRes {220118122832}\n', JSON.stringify(crdelemsRes, null, 4)) // del+
+  // } catch (err) {
+  //   console.log('!!-!!-!! err {220118100440}\n', err) // del+
+  // }
+  // ---
+  // return cdrelemsB()
+  return cdrelems()
+}
+
+function colorByType(type: CvxnEnKelemType) {
+  return CvxnEnKelemTypeData[type]?.colorChakra || 'red'
 }
 
 function CardFCC({el}: { el: CvxnCrdelem }) {
@@ -19,6 +34,12 @@ function CardFCC({el}: { el: CvxnCrdelem }) {
     <div className="crdelemMrk">
       <div className="crdelemMrk_title">{el.title}</div>
       <div className="crdelemMrk_id">{el.id}</div>
+      <div className="crdelemMrk_types">{
+        // LOOP
+        el.kelems.map((elKelem, ix) => {
+          return (<Badge key={ix} colorScheme={colorByType(elKelem.type)} className="crdelemMrk_type">{elKelem.type}</Badge>)
+        })
+      }</div>
       <div className="buttons">
         <Tooltip placement={'top'} label={'редактировать'}>
           <IconButton size="xs" aria-label='create' icon={<EditIcon/>} onClick={clickHandle(el)}/>
@@ -46,7 +67,7 @@ export default function CardsCMP() {
       </div>
       <div className="crdelemsMrk">
         {/* LOOP */}
-        {crdelems0.map((el: CvxnCrdelem) => (<CardFCC key={el.id} el={el}/>))}
+        {crdelems0.map((el: CvxnCrdelem, ix: number) => (<CardFCC key={el.id} el={el}/>))}
       </div>
     </div>
   )
